@@ -10,7 +10,22 @@ Set TOPIC = 1..5 to pick which demo to run.
 5 = FFT of Vibration       (time-domain signal → frequency spectrum)
 
 Works in Google Colab: animated topics render via HTML(anim.to_jshtml()).
+Also works locally (auto-detects environment).
 """
+
+# Auto-select a working matplotlib backend when running locally
+_in_notebook = False
+try:
+    from IPython import get_ipython
+    _ip = get_ipython()
+    if _ip is not None and 'IPKernelApp' in _ip.config:
+        _in_notebook = True
+except Exception:
+    pass
+
+if not _in_notebook:
+    import matplotlib
+    matplotlib.use('webagg')
 
 # ═══════════════════════════════════════════════════════════════════
 #  CHOOSE TOPIC HERE (1 to 5)
